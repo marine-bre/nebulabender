@@ -14,7 +14,7 @@ let hint = document.getElementById('hint');
 let restart = document.getElementById('restart');
 let game = document.getElementById('game');
 
-let tries = 10
+let tries = 7
 var userGuess = "";
 
 // event listener for the submit button 
