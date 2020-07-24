@@ -75,7 +75,7 @@ restart.addEventListener('click', () => {
     userGuess = "";
     hint.textContent = "";
     message.textContent = "Take your first guess!";
-    tries = 10;
+    tries = 7;
     number = Math.floor(Math.random() * 100);
     guess.value="";
     guess.classList.remove('hidden');
