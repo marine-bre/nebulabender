@@ -8,6 +8,7 @@ let tie = document.getElementById('tie');
 let pW = 0;
 let cW = 0;
 let turns = 0;
+//
 
 //event listeners for each cell and restart button
 
