@@ -42,12 +42,12 @@ function cross() {
 //how the computer chooses its next celland whether he should play at all if there's a tie
 //need to make the AI smart here
 function compPlay() {
-//     if (boxes.every(function (element) {
-//         return element.classList.contains('comp-chosen') || element.classList.contains('chosen')
-//     })) {
-//         tieFunc();
-//         return;
-//     }
+    if (boxes.every(function (element) {
+        return element.classList.contains('comp-chosen') || element.classList.contains('chosen')
+    })) {
+        tieFunc();
+        return;
+    }
 //     //second turn situation
 //     if (turns === 1) {
 //         if (boxes[4].classList.contains('chosen')) {
