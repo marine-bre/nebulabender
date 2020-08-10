@@ -26,6 +26,7 @@ function cross() {
         return
     };
     this.classList.add('chosen');
+    this.classList.remove('clear')
     this.removeEventListener('click', cross);    //player won't be able to click on this cell again
     disableBoard = true;                         //makes the board disabled while the computer is playing
     turns++;
@@ -161,78 +162,79 @@ function compPlay() {
 }
 
 function block() {
-    if (boxes[0].classList.contains('chosen') && boxes[1].classList.contains('chosen') && boxes[2].classList.contains('clear')) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear'); ;
+    if ((boxes[0].classList.contains('chosen') && boxes[1].classList.contains('chosen') && boxes[2].classList.contains('clear'))||(boxes[0].classList.contains('comp-chosen') && boxes[1].classList.contains('comp-chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear'); ;
     turns++;
     console.log(turns);return }
-    if (boxes[0].classList.contains('chosen') && boxes[2].classList.contains('chosen') && boxes[1].classList.contains('clear')) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
+    if ((boxes[0].classList.contains('chosen') && boxes[2].classList.contains('chosen') && boxes[1].classList.contains('clear'))||(boxes[0].classList.contains('comp-chosen') && boxes[2].classList.contains('comp-chosen') && boxes[1].classList.contains('clear'))) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[1].classList.contains('chosen') && boxes[2].classList.contains('chosen') && boxes[0].classList.contains('clear')) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    if ((boxes[1].classList.contains('chosen') && boxes[2].classList.contains('chosen') && boxes[0].classList.contains('clear'))||(boxes[1].classList.contains('comp-chosen') && boxes[2].classList.contains('comp-chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[3].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[5].classList.contains('clear')) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
+    if ((boxes[3].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[5].classList.contains('clear'))||(boxes[3].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[5].classList.contains('clear'))) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[3].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[4].classList.contains('clear')) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    if ((boxes[3].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[4].classList.contains('clear'))||(boxes[3].classList.contains('comp-chosen') && boxes[5].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[4].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[3].classList.contains('clear')) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
+    if ((boxes[4].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[3].classList.contains('clear'))||(boxes[4].classList.contains('comp-chosen') && boxes[5].classList.contains('comp-chosen') && boxes[3].classList.contains('clear'))) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[6].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[8].classList.contains('clear')) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    if ((boxes[6].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[8].classList.contains('clear'))||(boxes[6].classList.contains('comp-chosen') && boxes[7].classList.contains('comp-chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[6].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[7].classList.contains('clear')) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
+    if ((boxes[6].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[7].classList.contains('clear'))||(boxes[6].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[7].classList.contains('clear'))) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
     turns++;
     console.log(turns);; return  }
-    if (boxes[7].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[6].classList.contains('clear')) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    if ((boxes[7].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[6].classList.contains('clear'))||(boxes[7].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[0].classList.contains('chosen') && boxes[3].classList.contains('chosen') && boxes[6].classList.contains('clear')) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    if ((boxes[0].classList.contains('chosen') && boxes[3].classList.contains('chosen') && boxes[6].classList.contains('clear'))||(boxes[0].classList.contains('comp-chosen') && boxes[3].classList.contains('comp-chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[0].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[3].classList.contains('clear')) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
+    if ((boxes[0].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[3].classList.contains('clear'))||(boxes[0].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[3].classList.contains('clear'))) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[3].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[0].classList.contains('clear')) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    if ((boxes[3].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[0].classList.contains('clear'))||(boxes[3].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[1].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[7].classList.contains('clear')) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
+    if ((boxes[1].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[7].classList.contains('clear'))||(boxes[1].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[7].classList.contains('clear'))) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[1].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[4].classList.contains('clear')) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    if ((boxes[1].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[4].classList.contains('clear'))||(boxes[1].classList.contains('comp-chosen') && boxes[7].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[4].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[1].classList.contains('clear')) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
+    if ((boxes[4].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[1].classList.contains('clear'))||(boxes[4].classList.contains('comp-chosen') && boxes[7].classList.contains('comp-chosen') && boxes[1].classList.contains('clear'))) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[2].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[8].classList.contains('clear')) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    if ((boxes[2].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[8].classList.contains('clear'))||(boxes[2].classList.contains('comp-chosen') && boxes[5].classList.contains('comp-chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[2].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[5].classList.contains('clear')) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
+    if ((boxes[2].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[5].classList.contains('clear'))||(boxes[2].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[5].classList.contains('clear'))) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[5].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[2].classList.contains('clear')) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
+    if ((boxes[5].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[2].classList.contains('clear'))||(boxes[5].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[0].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[8].classList.contains('clear')) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    if ((boxes[0].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[8].classList.contains('clear'))||(boxes[0].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[0].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[4].classList.contains('clear')) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    if ((boxes[0].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[4].classList.contains('clear'))||(boxes[0].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
     turns++;
     console.log(turns);; return}
-    if (boxes[4].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[0].classList.contains('clear')) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    if ((boxes[4].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[0].classList.contains('clear'))||(boxes[4].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[2].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[6].classList.contains('clear')) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    if ((boxes[2].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[6].classList.contains('clear'))||(boxes[2].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[2].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[4].classList.contains('clear')) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    if ((boxes[2].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[4].classList.contains('clear'))||(boxes[2].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
-    if (boxes[4].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[2].classList.contains('clear')) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
+    if ((boxes[4].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[2].classList.contains('clear'))||(boxes[4].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
     turns++;
     console.log(turns);; return }
+
     else{elsePlay()}
 }
 
