@@ -1,43 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
- </head>
-<body>
-    <p style="font-size:30px" class="main-title">Difficult mode!</p>
-    <button class="restart" id="restart">Restart Game</button>
-   
-    <div id="menu">
-        <p id='pW'>Player:0</p>
-        <p id='cW'>Opponent:0</p>
-    </div>
+let boxess = document.querySelectorAll('.box');
+let boxes = Array.from(boxess); // need to create an array from the NodeList to be able to apply certain methods
+let restart = document.getElementById('restart');
+let disableBoard = false; //needed to make sure the player does not click during the computer's turn.
+let victory = document.getElementById('victory');
+let defeat = document.getElementById('defeat');
+let tie = document.getElementById('tie');
+let pW = 0;
+let cW = 0;
+let turns = 0;
 
-    <div class='board'>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div class="box clear"></div>
-        <div id='victory' class="hidden">
-            <p>YOU WON!!!</p>
-        </div>
-        <div id='defeat' class="hidden">
-            <p>YOU LOST :(</p>
-        </div>
-        <div id='tie' class="hidden">
-            <p>It's a tie!</p>
-        </div>
-    </div>
-    <button class="restart"id="changeDif"><a href="menu.html">Change difficulty</a></button>
-    <script src='smart.js'></script>
+//event listeners for each cell and restart button
 
-</body>
-</html>
+
+
+restart.addEventListener("click", () => {
+    resetBoard()
+}
+)
+
+boxes.forEach(box => box.addEventListener('click', cross));
+
+//what plays out after the player has clicked on a cell
+function cross() {
+    if (disableBoard) {
+        return
+    };
+    this.classList.add('chosen');
+    this.classList.remove('clear')
+    this.removeEventListener('click', cross);    //player won't be able to click on this cell again
+    disableBoard = true;                         //makes the board disabled while the computer is playing
+    turns++;
+    console.log(turns);
+    if (DidPlayerWon() == true) {
+        return
+    };
+    setTimeout(() => {
+        compPlay();
+        DidCompWon();
+        disableBoard = false;
+    }
+        , 1000)
+}
+
+//how the computer chooses its next cell and whether he should play at all if there's a tie
+//need to make the AI smart here
+function compPlay() {
+    if (boxes.every(function (element) {
+        return element.classList.contains('comp-chosen') || element.classList.contains('chosen')
+    })) {
+        tieFunc();
+        return;
+    }
+    //second turn situation
+    if (turns === 1) {
+        if (boxes[4].classList.contains('chosen')) {
+            let list = [0, 2, 6, 8];
+            let i = list[Math.floor(Math.random() * list.length)];
+            boxes[i].classList.add('comp-chosen');
+            boxes[i].classList.remove('clear');
+            turns++;
+            console.log(turns);
+            return;
+        }
+        else {
+            boxes[4].classList.add('comp-chosen');
+            boxes[4].classList.remove('clear');
+            turns++;
+            console.log(turns);
+            return;
+        }
+    }
+
+    if (turns === 3) {
+        if ((boxes[0].classList.contains('comp-chosen') && boxes[4].classList.contains('chosen') && boxes[8].classList.contains('chosen')) || (boxes[8].classList.contains('comp-chosen') && boxes[4].classList.contains('chosen') && boxes[0].classList.contains('chosen'))) {
+            let list = [2, 6];
+            let i = list[Math.floor(Math.random() * list.length)];
+            boxes[i].classList.add('comp-chosen');
+            boxes[i].classList.remove('clear');
+            turns++;
+            console.log(turns);
+            return;
+        }
+        if ((boxes[2].classList.contains('comp-chosen') && boxes[4].classList.contains('chosen') && boxes[6].classList.contains('chosen')) || (boxes[6].classList.contains('comp-chosen') && boxes[4].classList.contains('chosen') && boxes[2].classList.contains('chosen'))) {
+            let list = [0, 8];
+            let i = list[Math.floor(Math.random() * list.length)];
+            boxes[i].classList.add('comp-chosen');
+            boxes[i].classList.remove('clear');
+            turns++;
+            console.log(turns);
+            return;
+        }
+        else { block() };
+    }
+
+    if (turns === 5) {block()}
+    if (turns==7){block()}
+}
+
+function block() {
+    //comp win strategy
+
+    if ((boxes[0].classList.contains('comp-chosen') && boxes[1].classList.contains('comp-chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear'); ;
+    turns++;
+    console.log(turns);return }
+    if ((boxes[0].classList.contains('comp-chosen') && boxes[2].classList.contains('comp-chosen') && boxes[1].classList.contains('clear'))) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[1].classList.contains('comp-chosen') && boxes[2].classList.contains('comp-chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[3].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[5].classList.contains('clear'))) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[3].classList.contains('comp-chosen') && boxes[5].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[4].classList.contains('comp-chosen') && boxes[5].classList.contains('comp-chosen') && boxes[3].classList.contains('clear'))) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[6].classList.contains('comp-chosen') && boxes[7].classList.contains('comp-chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[6].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[7].classList.contains('clear'))) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return  }
+    if ((boxes[7].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('comp-chosen') && boxes[3].classList.contains('comp-chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[3].classList.contains('clear'))) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[3].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[1].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[7].classList.contains('clear'))) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[1].classList.contains('comp-chosen') && boxes[7].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[4].classList.contains('comp-chosen') && boxes[7].classList.contains('comp-chosen') && boxes[1].classList.contains('clear'))) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('comp-chosen') && boxes[5].classList.contains('comp-chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[5].classList.contains('clear'))) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[5].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return}
+    if ((boxes[4].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('comp-chosen') && boxes[4].classList.contains('comp-chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[4].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+
+
+    //
+    if ((boxes[0].classList.contains('chosen') && boxes[1].classList.contains('chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear'); ;
+    turns++;
+    console.log(turns);return }
+    if ((boxes[0].classList.contains('chosen') && boxes[2].classList.contains('chosen') && boxes[1].classList.contains('clear'))) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[1].classList.contains('chosen') && boxes[2].classList.contains('chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[3].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[5].classList.contains('clear'))) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[3].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[4].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[3].classList.contains('clear'))) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[6].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[6].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[7].classList.contains('clear'))) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return  }
+    if ((boxes[7].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('chosen') && boxes[3].classList.contains('chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[3].classList.contains('clear'))) { boxes[3].classList.add('comp-chosen'); boxes[3].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[3].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[1].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[7].classList.contains('clear'))) { boxes[7].classList.add('comp-chosen'); boxes[7].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[1].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[4].classList.contains('chosen') && boxes[7].classList.contains('chosen') && boxes[1].classList.contains('clear'))) { boxes[1].classList.add('comp-chosen'); boxes[1].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('chosen') && boxes[5].classList.contains('chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[5].classList.contains('clear'))) { boxes[5].classList.add('comp-chosen'); boxes[5].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[5].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[8].classList.contains('clear'))) { boxes[8].classList.add('comp-chosen'); boxes[8].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[0].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return}
+    if ((boxes[4].classList.contains('chosen') && boxes[8].classList.contains('chosen') && boxes[0].classList.contains('clear'))) { boxes[0].classList.add('comp-chosen'); boxes[0].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('chosen') && boxes[4].classList.contains('chosen') && boxes[6].classList.contains('clear'))) { boxes[6].classList.add('comp-chosen'); boxes[6].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[2].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[4].classList.contains('clear'))) { boxes[4].classList.add('comp-chosen'); boxes[4].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+    if ((boxes[4].classList.contains('chosen') && boxes[6].classList.contains('chosen') && boxes[2].classList.contains('clear'))) { boxes[2].classList.add('comp-chosen'); boxes[2].classList.remove('clear') ;
+    turns++;
+    console.log(turns);; return }
+
+    else{elsePlay()}
+}
+
+
+function elsePlay() {
+    let randBox;
+    randBox = Math.floor(Math.random() * 9);
+    while (boxes[randBox].classList.contains('chosen') || boxes[randBox].classList.contains('comp-chosen')) {
+        randBox = Math.floor(Math.random() * 9);
+    }
+    boxes[randBox].classList.add('comp-chosen')
+    boxes[randBox].classList.remove('clear')
+    boxes[randBox].removeEventListener('click', cross);
+    turns++;
+    console.log(turns);
+    return;
+
+}
+
+//resetting all the classes and clicked boxes 
+function resetBoard() {
+    boxes.forEach(box => box.addEventListener('click', cross));
+    boxes.forEach(box => box.classList.remove('chosen'));
+    boxes.forEach(box => box.classList.remove('comp-chosen'));
+    boxes.forEach(box => box.classList.add('clear'));
+    disableBoard = false;
+    victory.classList.add('hidden');
+    victory.classList.remove('victory');
+    boxes.forEach(box => box.classList.remove('greyed-out'));
+    defeat.classList.add('hidden');
+    defeat.classList.remove('defeat');
+    tie.classList.add('hidden');
+    tie.classList.remove('tie');
+    turns = 0;
+}
+
+//checking every turn if the player has a winning combo
+function DidPlayerWon() {
+    for (let n = 0; n < 7; n = n + 3) {
+        if (boxes[n].classList.contains('chosen') && boxes[n + 1].classList.contains('chosen') && boxes[n + 2].classList.contains('chosen')) {
+            playerVictory();
+            return true;
+        }
+    }
+    for (let m = 0; m < 3; m++) {
+        if (boxes[m].classList.contains('chosen') && boxes[m + 3].classList.contains('chosen') && boxes[m + 6].classList.contains('chosen')) { playerVictory(); return true; }
+    }
+    if (boxes[4].classList.contains('chosen') && ((boxes[0].classList.contains('chosen') && boxes[8].classList.contains('chosen')) || (boxes[2].classList.contains('chosen') && boxes[6].classList.contains('chosen')))) { playerVictory(); return true; }
+}
+
+//checking every turn if the computer has a winning combo
+function DidCompWon() {
+    for (let n = 0; n < 7; n = n + 3) {
+        if (boxes[n].classList.contains('comp-chosen') && boxes[n + 1].classList.contains('comp-chosen') && boxes[n + 2].classList.contains('comp-chosen')) {
+            compVictory()
+        }
+    }
+    for (let m = 0; m < 3; m++) {
+        if (boxes[m].classList.contains('comp-chosen') && boxes[m + 3].classList.contains('comp-chosen') && boxes[m + 6].classList.contains('comp-chosen')) { compVictory() }
+    }
+    if (boxes[4].classList.contains('comp-chosen') && ((boxes[0].classList.contains('comp-chosen') && boxes[8].classList.contains('comp-chosen')) || (boxes[2].classList.contains('comp-chosen') && boxes[6].classList.contains('comp-chosen')))) { compVictory() }
+}
+
+
+//functions that determing the winning/losing animation
+function playerVictory() {
+    victory.classList.remove('hidden');
+    victory.classList.add('victory');
+    boxes.forEach(box => box.classList.add('greyed-out'));
+    pW++;
+    document.getElementById('pW').textContent = "Player :" + pW;
+
+}
+
+function compVictory() {
+    defeat.classList.remove('hidden');
+    defeat.classList.add('defeat');
+    boxes.forEach(box => box.classList.add('greyed-out'));
+    cW++;
+    document.getElementById('cW').textContent = "Opponent :" + cW;
+}
+
+function tieFunc() {
+    tie.classList.remove('hidden');
+    tie.classList.add('tie');
+    boxes.forEach(box => box.classList.add('greyed-out'));
+}
