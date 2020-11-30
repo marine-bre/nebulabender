@@ -48,7 +48,6 @@ overflow: hidden;
 #menu{
     display: flex;
     width:40%;
-    /* margin:1vh auto; */
     font-size: 18px;
     color:#B982C1;
 justify-content: space-around;    
@@ -58,7 +57,7 @@ font-family: 'Quicksand', sans-serif;
 
 .chosen::before{
     content: "X";
-    font-size: 20vh;
+    font-size: 700%;
     margin: auto;
     color: #f5c5a3;
     font-family: 'Quicksand', sans-serif;
@@ -66,7 +65,7 @@ font-family: 'Quicksand', sans-serif;
 
 .comp-chosen::before{
     content: "O";
-    font-size: 20vh;
+    font-size: 700%;
     margin: auto;
     color: #ACECD5;
     font-family: 'Quicksand', sans-serif;
@@ -114,8 +113,9 @@ font-family: 'Quicksand', sans-serif;
     animation-fill-mode: forwards; 
 }
 
-
-
+#changeDif{
+    margin-bottom: 15px;
+}
 
 @keyframes victorious {
     0% {transform: scale(2);}
@@ -155,5 +155,18 @@ a:link, a:visited{
 .board{
     width:80vw;
     height:80vw;
+}
+#menu{
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.chosen::before{
+    font-size: 450%;
+}
+
+.comp-chosen::before{
+    font-size: 450%;
 }
 }
