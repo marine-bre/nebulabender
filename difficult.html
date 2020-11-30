@@ -8,12 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
  </head>
 <body>
+    <div id='tic-tac-toe'>
     <p style="font-size:30px" class="main-title">Difficult mode!</p>
-    <button class="restart" id="restart">Restart Game</button>
+    <button class="restart btn" id="restart">Restart Game</button>
    
     <div id="menu">
-        <p id='pW'>Player:0</p>
-        <p id='cW'>Opponent:0</p>
+        <div id='pW'>Player:0</div>
+        <div id='cW'>Opponent:0</div>
     </div>
 
     <div class='board'>
@@ -36,7 +37,8 @@
             <p>It's a tie!</p>
         </div>
     </div>
-    <button class="restart"id="changeDif"><a href="menu.html">Change difficulty</a></button>
+    <button class="btn"id="changeDif"><a href="menu.html">Change difficulty</a></button>
+</div>
     <script src='smart.js'></script>
 
 </body>
