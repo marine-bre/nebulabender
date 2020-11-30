@@ -151,6 +151,12 @@ a:link, a:visited{
     color:#B982C1;
 }
 
+.btn-wrapper{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
 @media only screen and (max-width: 650px) {
 .board{
     width:80vw;
