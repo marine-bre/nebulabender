@@ -1,178 +1,184 @@
-body{
-background-color: #ece9e5;
-overflow: hidden;
+body {
+  background-color: #ece9e5;
+  overflow: hidden;
 }
 
-#tic-tac-toe{
-    height:100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+#tic-tac-toe {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.box{
-    display: flex;
-    border: 2px solid #3e3838;
+.box {
+  display: flex;
+  border: 2px solid #3e3838;
 }
 
-.board{
-    display:grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
-    grid-template-rows: 33.3% 33.3% 33.3%;
-    position: relative;    
-    width: 70vh;
-    height:70vh;
-    margin: auto;
+.board {
+  display: grid;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-template-rows: 33.3% 33.3% 33.3%;
+  position: relative;
+  width: 70vh;
+  height: 70vh;
+  margin: auto;
 }
 
-.btn{
-    margin:5px;
-    border:3px solid #B982C1;
-    border-radius: 12px;
-    background-color: transparent;
-    font-size: 18px;
-    color:#B982C1;
-    font-family: 'Quicksand', sans-serif;
+.btn {
+  margin: 5px;
+  border: 3px solid #b982c1;
+  border-radius: 12px;
+  background-color: transparent;
+  font-size: 18px;
+  color: #b982c1;
+  font-family: "Quicksand", sans-serif;
 }
 
-.main-title{
-    text-align: center;
-    margin:10px;
-    font-size: 120px;
-    color:#B982C1;
-    font-family: 'Quicksand', sans-serif;
+.main-title {
+  text-align: center;
+  margin: 10px;
+  font-size: 120px;
+  color: #b982c1;
+  font-family: "Quicksand", sans-serif;
 }
 
-
-#menu{
-    display: flex;
-    width:40%;
-    font-size: 18px;
-    color:#B982C1;
-justify-content: space-around;    
-font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
+#menu {
+  display: flex;
+  width: 40%;
+  font-size: 18px;
+  color: #b982c1;
+  justify-content: space-around;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
 }
 
-.chosen::before{
-    content: "X";
-    font-size: 700%;
-    margin: auto;
-    color: #f5c5a3;
-    font-family: 'Quicksand', sans-serif;
+.chosen::before {
+  content: "X";
+  font-size: 700%;
+  margin: auto;
+  color: #f5c5a3;
+  font-family: "Quicksand", sans-serif;
 }
 
-.comp-chosen::before{
-    content: "O";
-    font-size: 700%;
-    margin: auto;
-    color: #ACECD5;
-    font-family: 'Quicksand', sans-serif;
+.comp-chosen::before {
+  content: "O";
+  font-size: 700%;
+  margin: auto;
+  color: #acecd5;
+  font-family: "Quicksand", sans-serif;
 }
 
-.victory{
-    animation-name: victorious;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    display:inline-block;
-    position: absolute;
-    left: 50%;
-    margin-left: -50px;
-    top: 50%;
-    margin-top: -20px;
-    font-family: 'Quicksand', sans-serif;
-    color: #f62681;
+.ending {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -20px;
+  font-family: "Quicksand", sans-serif;
+  animation-duration: 2s;
+
 }
 
-.defeat{
-    animation-name: defeat;
-    animation-duration: 2s;
-    display:inline-block;
-    position: absolute;
-    left: 50%;
-    margin-left: -50px;
-    top: 50%;
-    margin-top: -20px;
-    font-family: 'Quicksand', sans-serif;
-    color: #3e3838;
-    animation-fill-mode: forwards; 
+.victory {
+  animation-name: victorious;
+  animation-iteration-count: infinite;
+  color: #f62681;
 }
 
-.tie{
-    animation-name: tie;
-    animation-duration: 2s;
-    display:inline-block;
-    position: absolute;
-    left: 50%;
-    margin-left: -50px;
-    top: 50%;
-    margin-top: -20px;
-    font-family: 'Quicksand', sans-serif;
-    color: #3e3838;
-    animation-fill-mode: forwards; 
+.defeat {
+  animation-name: defeat;
+  color: #3e3838;
+  animation-fill-mode: forwards;
 }
 
-#changeDif{
-    margin-bottom: 15px;
+.tie {
+  animation-name: tie;
+  color: #3e3838;
+  animation-fill-mode: forwards;
+}
+
+#changeDif {
+  margin-bottom: 15px;
 }
 
 @keyframes victorious {
-    0% {transform: scale(2);}
-    50% {transform: scale(6);}
-    100% {transform: scale(2);}
+  0% {
+    transform: scale(2);
+  }
+  50% {
+    transform: scale(6);
+  }
+  100% {
+    transform: scale(2);
+  }
 }
 
 @keyframes defeat {
-    100% {transform: scale(6);}
+  100% {
+    transform: scale(6);
+  }
 }
 
 @keyframes tie {
-    100% {transform: scale(6);}
+  100% {
+    transform: scale(6);
+  }
 }
 
 .greyed-out {
-    animation:greyed;
-    animation-duration: 1s;
-    animation-fill-mode: forwards; 
+  animation: greyed;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes greyed {
-    100% {color: #cecace;}
-    100% {border-color: #cecace;}
+  100% {
+    color: #cecace;
+  }
+  100% {
+    border-color: #cecace;
+  }
 }
 
 .hidden {
-    display:none;
+  display: none;
 }
 
-a:link, a:visited{
-    text-decoration: none;
-    color:#B982C1;
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #b982c1;
 }
 
-.btn-wrapper{
-    width:100%;
-    display: flex;
-    justify-content: center;
+.btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 650px) {
-.board{
-    width:80vw;
-    height:80vw;
-}
-#menu{
+  .board {
+    width: 80vw;
+    height: 80vw;
+  }
+  #menu {
     flex-direction: column;
     align-items: center;
     margin-top: 25px;
-}
+  }
 
-.chosen::before{
+  .chosen::before {
     font-size: 450%;
-}
+  }
 
-.comp-chosen::before{
+  .comp-chosen::before {
     font-size: 450%;
-}
+  }
+  .ending{
+      font-size: 0.5em;
+      left:60%
+  }
 }
