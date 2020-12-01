@@ -253,17 +253,16 @@ function elsePlay() {
 //resetting all the classes, clicked boxes and variables
 function resetBoard() {
     boxes.forEach(box => box.addEventListener('click', cross));
-    boxes.forEach(box => box.classList.remove('chosen'));
-    boxes.forEach(box => box.classList.remove('comp-chosen'));
+    boxes.forEach(box => box.classList.remove('chosen', 'comp-chosen'));
     boxes.forEach(box => box.classList.add('clear'));
     disableBoard = false;
     victory.classList.add('hidden');
-    victory.classList.remove('victory');
+    victory.classList.remove('victory', 'ending');
     boxes.forEach(box => box.classList.remove('greyed-out'));
     defeat.classList.add('hidden');
-    defeat.classList.remove('defeat');
+    defeat.classList.remove('defeat', 'ending');
     tie.classList.add('hidden');
-    tie.classList.remove('tie');
+    tie.classList.remove('tie', 'ending');
     turns = 0;
 }
 
@@ -298,7 +297,7 @@ function DidCompWon() {
 //functions that determing the winning/losing/tie animation
 function playerVictory() {
     victory.classList.remove('hidden');
-    victory.classList.add('victory');
+    victory.classList.add('victory', 'ending');
     boxes.forEach(box => box.classList.add('greyed-out'));
     pW++;
     document.getElementById('pW').textContent = "Player :" + pW;
@@ -307,7 +306,7 @@ function playerVictory() {
 
 function compVictory() {
     defeat.classList.remove('hidden');
-    defeat.classList.add('defeat');
+    defeat.classList.add('defeat', 'ending');
     boxes.forEach(box => box.classList.add('greyed-out'));
     cW++;
     document.getElementById('cW').textContent = "Opponent :" + cW;
@@ -315,6 +314,6 @@ function compVictory() {
 
 function tieFunc() {
     tie.classList.remove('hidden');
-    tie.classList.add('tie');
+    tie.classList.add('tie', 'ending');
     boxes.forEach(box => box.classList.add('greyed-out'));
 }
